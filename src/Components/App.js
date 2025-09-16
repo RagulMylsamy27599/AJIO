@@ -20,7 +20,7 @@ const Home = lazy(() => {
 const App = () => {
   return (
     <Provider store={Appstore}>
-      <div>
+      <div className="flex flex-col">
         <Header />
         <Outlet />
         {/* <Footer /> */}

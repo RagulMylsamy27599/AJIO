@@ -13,12 +13,12 @@ const Home = () => {
   const { onlineStatus } = useOnlineStatus();
   if (!onlineStatus) return <Offline />;
   return (
-    <div>
+    <div className="pt-20">
       <Carousal carousalImages={CAROUSAL_IMAGES_CLOTH_OFFERS} />
       <Carousal carousalImages={CAROUSAL_IMAGES_CARD_OFFERS} />
-      <div className="flex flex-col mb-10 cursor-pointer">
-        <img src={ADD_ONE}></img>
-        <img src={ADD_TWO}></img>
+      <div className="flex flex-col mb-10 cursor-pointer max-w-6xl mx-auto">
+        <img alt="Special Offer" src={ADD_ONE} className="w-full"></img>
+        <img alt="Free Delivery Offer" src={ADD_TWO} className="w-full"></img>
       </div>
     </div>
   );

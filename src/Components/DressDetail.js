@@ -49,7 +49,6 @@ const DressDetail = () => {
     if (cartPayload?.selectedSize) {
       setAddedToCart(true);
       dispatchCart(addItem(cartPayload));
-      console.log(data);
     } else {
       setSizeError(true);
     }
@@ -60,37 +59,43 @@ const DressDetail = () => {
   };
 
   return (
-    <div className="flex justify-center items-center flex-col">
-      <div className="flex flex-row mt-20">
-        <div className="border-solid border-[1px] p-5 border-[#738ea6] mr-10">
-          <img src={outfitPictureURL} />
+    <div className="flex justify-center items-center flex-col pt-20">
+      <div className="flex flex-row mt-8 max-w-6xl mx-auto px-4">
+        <div className="border-solid border-[1px] p-5 border-gray-200 mr-10 rounded-lg shadow-md">
+          <img
+            alt={`${brandTypeName} - ${name}`}
+            src={outfitPictureURL}
+            className="w-96 h-96 object-cover rounded"
+          />
         </div>
-        <div className="flex flex-col justify-center">
-          <h2 className="text-[25px] mb-2.5 text-[#333A56]">
+        <div className="flex flex-col justify-center max-w-md">
+          <h2 className="text-2xl mb-3 text-gray-800 font-bold">
             {brandTypeName.toUpperCase()}
           </h2>
-          <h4 className="mb-2.5 text-[#333A56]/80">{name}</h4>
-          <div className="text-[#9f8700]">
-            <span>4.3 ⭐</span>
-            <span>1.3K Ratings</span>
+          <h4 className="mb-4 text-gray-600 text-lg">{name}</h4>
+          <div className="flex items-center gap-2 mb-4">
+            <span className="text-yellow-500 text-lg">4.3 ⭐</span>
+            <span className="text-gray-600">1.3K Ratings</span>
           </div>
-          <p className="text-[#F97316] text-2xl my-2.5">{`₹ ${price.value}`}</p>
-          <p className="text-[#00490d]">
-            MRP{" "}
-            <span className="line-through">{`₹ ${wasPriceData.value}`}</span>
-            <span className="text-[#22C55E] ml-1">{`(${discountPercent})`}</span>
-          </p>
-          <div className="flex flex-col justify-center items-center">
-            <p className="pt-5 text-[#1ca2fb]">Select Size</p>
-            <ul className="flex pt-5">
+          <div className="mb-4">
+            <p className="text-orange-600 text-3xl font-bold">{`₹ ${price.value}`}</p>
+            <p className="text-gray-600">
+              MRP{" "}
+              <span className="line-through">{`₹ ${wasPriceData.value}`}</span>
+              <span className="text-green-600 ml-2 font-semibold">{`(${discountPercent})`}</span>
+            </p>
+          </div>
+          <div className="flex flex-col justify-center items-start mb-6">
+            <p className="text-blue-600 font-semibold mb-3">Select Size</p>
+            <ul className="flex gap-2">
               {SIZES.map((size, index) => {
                 return (
                   <li
                     className={`${
                       size === selectedSize
-                        ? "bg-[#00b61b8a] text-white font-semibold"
-                        : "bg-[#EEF2FF]"
-                    } rounded-full px-3.5 py-2 mx-2 cursor-pointer`}
+                        ? "bg-blue-600 text-white font-semibold"
+                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                    } rounded-full px-4 py-2 cursor-pointer transition-colors`}
                     key={size}
                     onClick={() => {
                       setSizeError(false);
@@ -104,39 +109,39 @@ const DressDetail = () => {
             </ul>
           </div>
           {sizeError && (
-            <p className="mt-2.5 text-red-500 text-center">
-              Please select a size
-            </p>
+            <p className="text-red-500 text-sm mb-2">Please select a size</p>
           )}
-          <p className="text-[#1ca2fb] ml-4 pt-2.5 cursor-pointer">
+          <p className="text-blue-600 text-sm cursor-pointer hover:underline mb-4">
             Check Size Chart
           </p>
           {!addedToCart && (
             <button
               className={`${
-                sizeError ? "border-red-500" : "border-[#2a547a]"
-              } border-solid border-[1px] py-2.5 rounded mt-3 cursor-pointer text-[#2F4254] flex justify-center font-[500]`}
+                sizeError
+                  ? "border-red-500 bg-red-50"
+                  : "border-blue-600 bg-blue-600 text-white hover:bg-blue-700"
+              } border-solid border-[1px] py-3 px-6 rounded-lg cursor-pointer flex justify-center items-center font-semibold transition-colors mb-3`}
               onClick={addToCartOnClick}
             >
               <img
+                alt="Add to Cart"
                 src="https://images.icon-icons.com/1993/PNG/512/bag_buy_cart_market_shop_shopping_tote_icon_123191.png"
-                className="w-6 mr-2"
+                className="w-5 mr-2"
               ></img>
               ADD TO CART
             </button>
           )}
           {addedToCart && (
             <Link
-              className={`${
-                sizeError ? "border-red-500" : "border-[#2a547a]"
-              } border-solid border-[1px] py-2.5 text-center rounded mt-3 cursor-pointer text-[#2F4254] flex justify-center items-center`}
+              className="border-solid border-[1px] border-green-600 bg-green-600 text-white py-3 px-6 text-center rounded-lg cursor-pointer flex justify-center items-center font-semibold hover:bg-green-700 transition-colors mb-3"
               to={"/CartContent"}
             >
-              <button className="flex justify-center font-[500] cursor-pointer">
+              <button className="flex justify-center items-center font-semibold cursor-pointer">
                 MOVE TO CART
                 <img
+                  alt="Move to Cart"
                   src="https://images.icon-icons.com/1993/PNG/512/arrow_arrows_back_direction_left_navigation_right_icon_123236.png"
-                  className="w-6 ml-2.5"
+                  className="w-5 ml-2"
                 ></img>
               </button>
             </Link>
@@ -144,13 +149,16 @@ const DressDetail = () => {
 
           <button
             className={`${
-              wishListed ? "bg-[#DC3454]" : "bg-[#2a547a]"
-            } border-solid border-[1px] bg-[#2a547a] py-2.5 rounded mt-3 text-white cursor-pointer flex justify-center items-center font-[500]`}
+              wishListed
+                ? "bg-red-500 hover:bg-red-600"
+                : "bg-gray-600 hover:bg-gray-700"
+            } py-3 px-6 rounded-lg text-white cursor-pointer flex justify-center items-center font-semibold transition-colors`}
             onClick={wishListOnClick}
           >
             <img
+              alt="Wishlist"
               src="https://images.icon-icons.com/37/PNG/32/like_favorite_heart_3524.png"
-              className="w-7 mr-2.5 invert brightness-10"
+              className="w-5 mr-2 invert brightness-10"
             ></img>
             {wishListed ? "WISHLISTED" : "ADD TO WISHLIST"}
           </button>

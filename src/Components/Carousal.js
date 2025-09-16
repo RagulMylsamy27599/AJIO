@@ -16,7 +16,11 @@ const Carousal = ({ carousalImages }) => {
   };
   return (
     <div className="flex flex-col items-center cursor-pointer">
-      <img className="max-w-[100%] " src={carousalImages[currentIndex]}></img>
+      <img
+        className="max-w-[100%] "
+        alt="Carousel Banner"
+        src={carousalImages[currentIndex]}
+      ></img>
 
       <div className="flex my-2.5">
         {carousalImages.map((img, idx) => {

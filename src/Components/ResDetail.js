@@ -24,10 +24,9 @@ const ResDetail = () => {
         );
       }
     );
-  console.log(categories);
 
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className="flex flex-col justify-center items-center pt-[6%]">
       {categories?.map((item, index) => {
         return (
           <CategoryCard

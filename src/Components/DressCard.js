@@ -1,46 +1,58 @@
 import { Link } from "react-router-dom";
+import { memo } from "react";
 
-const DressCards = ({ data, gender }) => {
+const DressCards = memo(({ data, gender }) => {
   const { fnlColorVariantData, price, wasPriceData, discountPercent, name } =
     data;
   return (
-    <Link to={`/${gender}/${fnlColorVariantData?.colorGroup}`}>
-      <div className="flex flex-col px-10 w-100 mt-10">
-        <img
-          className="rounded-lg border-[1px] border-solid border-neutral-100 mb-5"
-          src={fnlColorVariantData?.outfitPictureURL}
-        />
-        <div>
-          <h3 className="font-semibold text-gray-500 pb-2">
+    <Link
+      to={`/${gender}/${fnlColorVariantData?.colorGroup}`}
+      className="group"
+    >
+      <div className="flex flex-col w-64 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
+        <div className="relative overflow-hidden">
+          <img
+            className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-300"
+            alt={`${fnlColorVariantData?.brandName} - ${name}`}
+            src={fnlColorVariantData?.outfitPictureURL}
+          />
+        </div>
+        <div className="p-4">
+          <h3 className="font-semibold text-gray-800 pb-2 text-sm">
             {fnlColorVariantData?.brandName}
           </h3>
-          <p className="text-gray-400 pb-2">{name}</p>
-          <p>
-            <span className="text-blue-300 pr-2.5">
+          <p className="text-gray-600 pb-2 text-sm line-clamp-2">{name}</p>
+          <div className="flex items-center gap-2">
+            <span className="text-lg font-bold text-gray-900">
               {price?.formattedValue}
             </span>
-            <span className="text-orange-600 pr-2.5 line-through">
+            <span className="text-sm text-gray-500 line-through">
               {wasPriceData?.formattedValue}
             </span>
-            <span className="text-emerald-600">{discountPercent}</span>
-          </p>
+            <span className="text-sm font-medium text-green-600 bg-green-100 px-2 py-1 rounded">
+              {discountPercent}
+            </span>
+          </div>
         </div>
       </div>
     </Link>
   );
-};
+});
 
 export const BestSellerDressCard = (DressCard) => {
   return (props) => {
     return (
-      <div className="flex flex-col relative cursor-pointer">
-        <p className="text-md absolute text-white mt-10 top-2.5 px-2.5 py-1.5 bg-blue-950/50 rounded left-12">
-          Best Seller
-        </p>
+      <div className="relative">
+        <div className="absolute top-2 left-2 z-10">
+          <span className="bg-blue-600 text-white text-xs font-semibold px-2 py-1 rounded-full">
+            Best Seller
+          </span>
+        </div>
         <DressCard {...props} />
       </div>
     );
   };
 };
 
+DressCards.displayName = "DressCards";
 export default DressCards;

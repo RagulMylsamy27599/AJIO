@@ -21,11 +21,12 @@ const Content = () => {
   if (!onlineStatus) return <Offline />;
   return (
     <div
+      className="pt-20"
       onClick={() => {
         setIsFilterVisible(false);
       }}
     >
-      <div className="flex justify-center-safe items-center mt-12">
+      <div className="flex justify-center items-center mt-8 px-4">
         <Search allJackets={allJackets} setJackets={setJackets} />
         <UpdateDressContext.Provider value={setJackets}>
           <Filter
@@ -35,7 +36,7 @@ const Content = () => {
           />
         </UpdateDressContext.Provider>
       </div>
-      <div className="flex flex-wrap pt-5 justify-center mt-3">
+      <div className="flex flex-wrap pt-5 justify-center gap-6 px-4">
         {!loading ? (
           jackets.map((jacket) => {
             return jacket?.tags?.categoryTags[0]?.primary?.name.toUpperCase() ===

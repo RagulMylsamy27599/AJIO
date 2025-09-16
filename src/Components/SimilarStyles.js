@@ -17,15 +17,6 @@ const SimilarStyles = ({ dressCode, APIURL }) => {
     return <Shimmer />;
   }
 
-  // const handleChevronClick = (right) => {
-  //   if (right && currentIndex === 12) return;
-  //   else if (!right && currentIndex === 0) return;
-  //   else {
-  //     right
-  //       ? setCurrentIndex((prev) => prev + 4)
-  //       : setCurrentIndex((prev) => prev - 4);
-  //   }
-  // };
   const displayData = similarItems?.similarProducts?.slice(1, 17);
   var settings = {
     dots: true,
@@ -38,32 +29,10 @@ const SimilarStyles = ({ dressCode, APIURL }) => {
     <div className="w-[80vw] mb-25">
       <Slider {...settings}>
         {displayData.map((item) => {
-          return <SimilarStyleCard displayData={item} />;
+          return <SimilarStyleCard displayData={item} key={item.code} />;
         })}
       </Slider>
     </div>
-
-    // <div className="flex flex-row pt-2.5 pb-25 relative w-[70vw] justify-center">
-    //   <ChevronLeftIcon
-    //     className="w-8 cursor-pointer"
-    //     onClick={(e) => {
-    //       e.stopPropagation();
-    //       handleChevronClick(false);
-    //     }}
-    //   />
-
-    //   <SimilarStyleCard displayData={displayData} index={currentIndex} />
-    //   <SimilarStyleCard displayData={displayData} index={currentIndex + 1} />
-    //   <SimilarStyleCard displayData={displayData} index={currentIndex + 2} />
-    //   <SimilarStyleCard displayData={displayData} index={currentIndex + 3} />
-    //   <ChevronRightIcon
-    //     className="w-8 cursor-pointer"
-    //     onClick={(e) => {
-    //       e.stopPropagation();
-    //       handleChevronClick(true);
-    //     }}
-    //   />
-    // </div>
   );
 };
 
